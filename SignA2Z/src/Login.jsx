@@ -6,6 +6,10 @@ import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
+// ✅ Import firebase stuff
+import { auth, provider } from "./firebase";
+import { signInWithPopup } from "firebase/auth";
+
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -15,10 +19,12 @@ function Login() {
   const validate = () => {
     const newErrors = {};
     if (!email) newErrors.email = "Email is required";
-    else if (!email.endsWith("@gmail.com")) newErrors.email = "Only @gmail.com emails allowed";
+    else if (!email.endsWith("@gmail.com"))
+      newErrors.email = "Only @gmail.com emails allowed";
 
     if (!password) newErrors.password = "Password is required";
-    else if (password.length > 100) newErrors.password = "Use 100 characters or fewer for your password";
+    else if (password.length > 100)
+      newErrors.password = "Use 100 characters or fewer for your password";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -31,19 +37,35 @@ function Login() {
     }
   };
 
+  // ✅ Google sign-in handler
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      alert(`Welcome ${user.displayName}!`);
+      console.log("Google user:", user);
+    } catch (error) {
+      console.error("Google sign-in error:", error);
+      alert("Google sign-in failed");
+    }
+  };
+
   return (
     <div className="back-page">
       <div className="login-container">
+        {/* left side */}
         <div className="login-left">
           <img src={A2Zlogo} alt="A2Z Logo" className="login-logo" />
           <h2 className="login-heading">
             Welcome to SignA2Z: Live ASL Translation & Learning
           </h2>
           <p className="login-subtext">
-            Bridging the gap between the Deaf and hearing through real-time ASL translation.
+            Bridging the gap between the Deaf and hearing through real-time ASL
+            translation.
           </p>
         </div>
 
+        {/* right side */}
         <div className="login-right">
           <img src={A2Zlogo} alt="A2Z Logo" className="login-logo-2" />
           <h2 className="login-title">Login</h2>
@@ -79,19 +101,30 @@ function Login() {
             </div>
             {errors.password && <p className="error-text">{errors.password}</p>}
 
-            <button type="submit" className="login-btn">Sign In</button>
+            <button type="submit" className="login-btn">
+              Sign In
+            </button>
 
             <div className="login-divider">━━━━━━━ or ━━━━━━━</div>
 
-            <button className="login-google-btn">
+            {/* ✅ Google login button */}
+            <button
+              type="button"
+              onClick={handleGoogleSignIn}
+              className="login-google-btn"
+            >
               <FcGoogle size={20} style={{ marginRight: "8px" }} />
               Sign in with Google
             </button>
           </form>
 
-          <a href="#" className="login-forgot-link">Forgot password?</a>
+          <a href="#" className="login-forgot-link">
+            Forgot password?
+          </a>
           <p className="login-signup-text">
-            <a href="/signup" className="login-signup-link">Sign Up</a>
+            <a href="/signup" className="login-signup-link">
+              Sign Up
+            </a>
           </p>
         </div>
       </div>
