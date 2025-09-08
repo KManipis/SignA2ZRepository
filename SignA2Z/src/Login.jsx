@@ -83,12 +83,15 @@ function Login() {
 
             <div className="login-divider">━━━━━━━ or ━━━━━━━</div>
 
-            <button className="login-google-btn">
+
+
+          {/* LOGIN BUTTON FOR GOOGLE */}
+            <button type="button" className="login-google-btn">
               <FcGoogle size={20} style={{ marginRight: "8px" }} />
               Sign in with Google
             </button>
-          </form>
 
+          </form>
           <a href="#" className="login-forgot-link">Forgot password?</a>
           <p className="login-signup-text">
             <a href="/signup" className="login-signup-link">Sign Up</a>
