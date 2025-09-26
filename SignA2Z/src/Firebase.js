@@ -1,14 +1,14 @@
-// Import the functions you need from the SDKs you need
+// Imports
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth"; // ✅ ADD THIS
+import { getAuth, GoogleAuthProvider } from "firebase/auth"; 
 import { getAnalytics } from "firebase/analytics";
 
-// Your web app's Firebase configuration
+// Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyAq-cmiw_pHauINcYQnLdhVOyhGqlWkBRc",
   authDomain: "signala2z.firebaseapp.com",
   projectId: "signala2z",
-  storageBucket: "signala2z.appspot.com", // ⚠ fix typo: ".firebasestorage.app" → ".appspot.com"
+  storageBucket: "signala2z.appspot.com", 
   messagingSenderId: "724997183385",
   appId: "1:724997183385:web:1edc6a9b789b7ea167a508",
   measurementId: "G-G8D2J46CRD"
